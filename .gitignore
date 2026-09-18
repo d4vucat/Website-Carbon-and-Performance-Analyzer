@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.db
+*.db-shm
+*.db-wal
+.env
+.DS_Store
+*.log
+backend/data/
+frontend/dist/

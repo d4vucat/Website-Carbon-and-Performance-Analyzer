@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --card: 224 71% 7%;
+    --card-foreground: 213 31% 91%;
+    --popover: 224 71% 7%;
+    --popover-foreground: 213 31% 91%;
+    --primary: 155 60% 52%;
+    --primary-foreground: 224 71% 4%;
+    --secondary: 222 47% 11%;
+    --secondary-foreground: 213 31% 91%;
+    --muted: 222 47% 11%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 155 60% 52%;
+    --accent-foreground: 224 71% 4%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 47% 14%;
+    --input: 222 47% 14%;
+    --ring: 155 60% 52%;
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Grade color utilities */
+.grade-aplus { color: #00875A; }
+.grade-a { color: #36B37E; }
+.grade-b { color: #79B8FF; }
+.grade-c { color: #FFAB00; }
+.grade-d { color: #FF8B00; }
+.grade-e { color: #FF5630; }
+.grade-f { color: #DE350B; }
+
+.bg-grade-aplus { background-color: #00875A; }
+.bg-grade-a { background-color: #36B37E; }
+.bg-grade-b { background-color: #2563EB; }
+.bg-grade-c { background-color: #D97706; }
+.bg-grade-d { background-color: #EA580C; }
+.bg-grade-e { background-color: #DC2626; }
+.bg-grade-f { background-color: #991B1B; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: hsl(224 71% 4%); }
+::-webkit-scrollbar-thumb { background: hsl(222 47% 20%); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(222 47% 30%); }
+
+/* Glass morphism panels */
+.glass {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Carbon grade ring */
+.grade-ring {
+  stroke-dasharray: 283;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s ease;
+  transform-origin: center;
+  transform: rotate(-90deg);
+}
+
+/* Scan line animation */
+@keyframes scanline {
+  0% { transform: translateY(-100%); opacity: 0.8; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.scan-effect::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(155 60% 52% / 0.5), transparent);
+  animation: scanline 2.5s ease-in-out infinite;
+}
+
+/* Number animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.count-up { animation: countUp 0.5s ease-out forwards; }
+
+/* Progress bar shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Tab underline */
+.tab-active {
+  position: relative;
+}
+.tab-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 2px;
+  background: hsl(155 60% 52%);
+  border-radius: 1px;
+}
+
+/* Tooltip */
+.tooltip {
+  @apply absolute z-50 px-2 py-1 text-xs rounded bg-card border border-border text-foreground shadow-lg pointer-events-none;
+}
